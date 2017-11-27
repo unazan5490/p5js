@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pong</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+       
+        var ballX;
+        var ballY;
+        var ballSpeedX = 5; 
+        var ballSpeedY = 5;
+        var paddleHeight = 30; 
+        var pause; 
+
+        function setup() {
+            createCanvas(800, 600); 
+            noCursor();
+            ballX = width / 2; 
+            ballY = height / 2; 
+
+        }
+
+        function draw() {
+            pause = 0; // pause is )
+            if (keyIsPressed){ // if any key is pressed then 
+                pause = 1; // pause is changed to one
+            }
+            if (pause == 0){ 
+                background(128);
+                moveBall(); 
+                checkCollide();
+                drawPaddle();
+                drawBall(); 
+            }
+        }
+
+
+        function moveBall() {
+            ballX = ballX + ballSpeedX;
+            ballY = ballY + ballSpeedY; // updates ball location vertically
+
+            // monitor speed/direction of ball
+            console.log("ballSpeedX: " + ballSpeedX + ", ballSpeedY: " + ballSpeedY);
+        }
+
+        function checkCollide() {
+            // left/right edges
+            if (ballX < 0 || ballX > width) {
+                ballSpeedX = ballSpeedX * -1; 
+            }
+
+            // top edge
+            if (ballY < 0) {
+                ballSpeedY = ballSpeedY * -1; 
+            }
+
+            // paddle
+            if (ballY > height - paddleHeight) { 
+                if (ballX > mouseX && ballX < mouseX + 200) { 
+                    ballSpeedY = ballSpeedY * -1; 
+                }
+                else { 
+                    text("GAME OVER!", width / 2, height / 2,300,300);
+                    noLoop();
+                }
+            }
+        }
+
+        function drawBall() {
+           
+            noStroke(); 
+            ellipse(ballX, ballY, 20, 20); 
+        }
+
+        function drawPaddle() {
+            fill("maroon")
+            strokeWeight(4); 
+
+            rect(mouseX, height - paddleHeight - 4, 200, paddleHeight);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/unazan5490/p5js/blob/master/game project.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+</html>
