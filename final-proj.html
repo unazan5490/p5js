@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Objects: Array of Bubbles with Parameters</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+      
+      var bubble1;
+      var bubbles = [];
+      var colors = []
+      
+      function setup() {
+        createCanvas(500,500);
+        bubble1 = new Bubble(50,100)
+        
+        for (var i = 0; i < 10; i++){
+          bubbles.push( new Bubble(random(width),random(height)))
+        }
+        
+      }
+      
+      function draw() {
+      
+        bubble1.display()
+
+        
+        
+        for(var i=0; i<bubbles.length; i++){
+          bubbles[i].move();
+          bubbles[i].display();
+        }
+      }
+      
+      function Bubble(xval,yval){
+        this.x = xval;
+        this.y = yval;
+        
+        this.move = function(){
+          this.x += random(-1,1);
+          this.y += random(-2,0);
+        }
+
+        this.display = function(){
+          stroke(255);
+          strokeWeight(5)
+          stroke (random(225),random(225),random(255))
+          noFill();
+          ellipse(this.x,this.y,50,50);
+        }
+      }
+      
+      function mousePressed(){
+          background (random(225),random(225),random(225))
+        bubbles.push(new Bubble(mouseX,mouseY));
+       
+      
+      }
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/unazan5490/p5js/blob/master/final-proj.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+  
+  
+  
+  
+</html>
+
+
